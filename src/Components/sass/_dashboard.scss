@@ -1,0 +1,30 @@
+.container__dashboard {
+  display: flex;
+  flex-direction: column;
+  // background-color: var(--color-dark-purple);
+  background-image: linear-gradient(
+    to bottom,
+    rgba(#a685e2, 1),
+    rgba(#d7d2f3, 1)
+  );
+  height: 100vh;
+}
+
+.container__search {
+  // background-color: black;
+}
+
+.container__songs {
+  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(25rem, 1fr));
+  grid-gap: 2rem;
+  //   align-items: center;
+  overflow-y: auto;
+  margin-bottom: auto;
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
+
+.container__player {
+}

@@ -1,0 +1,33 @@
+.trackCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 25rem;
+  height: 30rem;
+  padding: 2rem;
+  box-sizing: border-box;
+  cursor: pointer;
+  background-color: rgba(black, 0.1);
+  //   box-shadow: 0 0.1rem 2rem rgba(black, 0.2);
+  border-radius: 3rem;
+
+  //Keeps songs and artist
+  &__details {
+    margin-top: 2rem;
+    padding: 0.5rem;
+    background-color: rgba($color: white, $alpha: 0.1);
+    box-shadow: 0 0.1rem 2rem rgba(white, 0.2);
+    border-radius: 1rem;
+  }
+  &-song {
+    font-family: inherit;
+    font-size: 1.5rem;
+    font-weight: 500;
+  }
+  &-artist {
+    font-family: inherit;
+    font-size: 1.2rem;
+    font-style: italic;
+  }
+}

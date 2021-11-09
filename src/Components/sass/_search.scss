@@ -1,0 +1,22 @@
+.form {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  // background-color: black;
+  &__input {
+    width: 50%;
+    padding: 0.5rem 1rem;
+    outline-style: none;
+    background-color: rgba($color: #ffe6e6, $alpha: 1);
+    // border: 2px solid rgba($color: black, $alpha: 0.5);
+    border: none;
+    font-family: inherit;
+    font-size: 1.6rem;
+    font-weight: 500;
+    border-radius: 2rem;
+
+    &:placeholder-shown {
+      color: black;
+    }
+  }
+}

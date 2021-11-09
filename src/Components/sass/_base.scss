@@ -1,0 +1,47 @@
+//COLORS
+:root {
+  --color-primary: #ffe6e6;
+  --color-secondary: #ffabe1;
+  --color-dark-purple: #a685e2;
+  --color-light-purple: #d7d2f3;
+}
+
+//Shadows
+$shadow-light: 0 0.5rem 2rem rgba(black, 0.3);
+
+//FONT FAMILY
+$font-quicksand: 'Quicksand', sans-serif;
+
+//Screen Sizes
+$bp-largest: 75em; //1200px / 16px : 75em
+$bp-large: 68.75em; //1100px / 16px : 68.75em
+$bp-medium: 56.25em; //900px / 16px : 56.25em
+$bp-small: 37.5em; //600px / 16px : 37.5em
+$bp-smallest: 31.25em; //500px / 16px : 31.25em
+
+//INITIAL CLEANUP
+* {
+  margin: 0;
+  padding: 0;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 62.5%; //1rem = 10px
+
+  @media only screen and (max-width: $bp-large) {
+    font-size: 50%;
+  }
+}
+
+body {
+  font-family: $font-quicksand;
+  line-height: 1.6;
+  font-weight: 300;
+}
