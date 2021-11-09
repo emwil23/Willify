@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/Willify/static/css/main.3d420c61.chunk.css",
-    "main.js": "/Willify/static/js/main.4e680d53.chunk.js",
-    "main.js.map": "/Willify/static/js/main.4e680d53.chunk.js.map",
+    "main.js": "/Willify/static/js/main.8738f226.chunk.js",
+    "main.js.map": "/Willify/static/js/main.8738f226.chunk.js.map",
     "runtime-main.js": "/Willify/static/js/runtime-main.be27c626.js",
     "runtime-main.js.map": "/Willify/static/js/runtime-main.be27c626.js.map",
     "static/js/2.938a2312.chunk.js": "/Willify/static/js/2.938a2312.chunk.js",
@@ -16,6 +16,6 @@
     "static/js/runtime-main.be27c626.js",
     "static/js/2.938a2312.chunk.js",
     "static/css/main.3d420c61.chunk.css",
-    "static/js/main.4e680d53.chunk.js"
+    "static/js/main.8738f226.chunk.js"
   ]
 }
