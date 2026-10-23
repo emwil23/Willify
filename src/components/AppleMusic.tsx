@@ -30,10 +30,13 @@ export function AppleMusicLink({
   url,
   label,
   className,
+  compact = false,
 }: {
   url: string
   label: string
   className?: string
+  /** Track rows: the arrow alone on phones, so titles stay readable. The label still names Apple Music. */
+  compact?: boolean
 }) {
   return (
     <a
@@ -46,7 +49,8 @@ export function AppleMusicLink({
         className,
       )}
     >
-      Apple Music <ArrowUpRight className="size-3" aria-hidden />
+      <span className={cn(compact && 'hidden sm:inline')}>Apple Music</span>
+      <ArrowUpRight className={cn('size-3', compact && 'size-4 sm:size-3')} aria-hidden />
     </a>
   )
 }

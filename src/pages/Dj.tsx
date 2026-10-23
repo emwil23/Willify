@@ -247,7 +247,7 @@ export function Dj() {
             className="mt-12 grid gap-10 lg:grid-cols-[320px_1fr]"
           >
             <div className="lg:sticky lg:top-24 lg:self-start">
-              <div className="mx-auto max-w-[280px]">
+              <div className="mx-auto max-w-[160px] lg:max-w-[280px]">
                 <Groove ids={tracks.map((t) => t.id)} />
               </div>
               <p className="spec text-muted mt-6">

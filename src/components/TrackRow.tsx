@@ -125,7 +125,7 @@ export function TrackRow({
       >
         <Heart className={cn(liked && 'fill-current')} />
       </button>
-      <AppleMusicLink url={track.url} label={`Open ${name} in Apple Music`} />
+      <AppleMusicLink url={track.url} label={`Open ${name} in Apple Music`} compact />
     </li>
   )
 }

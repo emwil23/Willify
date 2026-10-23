@@ -30,7 +30,7 @@ export function PlaylistPage() {
   return (
     <div className="mx-auto grid w-full max-w-6xl gap-10 px-4 py-8 sm:px-6 lg:grid-cols-[320px_1fr]">
       <div className="lg:sticky lg:top-24 lg:self-start">
-        <div className="mx-auto max-w-[260px]">
+        <div className="mx-auto max-w-[160px] lg:max-w-[260px]">
           <Groove ids={tracks.map((t) => t.id)} />
         </div>
         <p className="spec text-muted mt-6">Playlist · {tracks.length} tracks</p>

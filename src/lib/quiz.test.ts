@@ -78,6 +78,9 @@ describe('clues', () => {
     expect(clues).toHaveLength(3)
     expect(clues.join(' ')).not.toMatch(/lucky|daft punk/i)
     expect(clues[0]).toBe('A dance track from 2013.')
+    expect(fallbackClues({ ...song, genre: 'Urbano latino' })[0]).toBe(
+      'An urbano latino track from 2013.',
+    )
   })
 
   it('replaces AI clues that leak the answer', () => {

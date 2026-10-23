@@ -79,7 +79,7 @@ export function scoreRound({
 export function fallbackClues(t: Track): string[] {
   return [
     t.genre
-      ? `A ${t.genre.toLowerCase()} track${t.year ? ` from ${String(t.year)}` : ''}.`
+      ? `${/^[aeiou]/i.test(t.genre) ? 'An' : 'A'} ${t.genre.toLowerCase()} track${t.year ? ` from ${String(t.year)}` : ''}.`
       : 'A song you may know.',
     t.album && t.album !== t.title
       ? `It's on the release “${t.album.replace(/ - (Single|EP)$/, '')}”.`
