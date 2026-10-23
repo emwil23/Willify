@@ -27,9 +27,9 @@ const VIBES = [
 
 const HUD = [
   { text: 'Lo-fi · Arm 2', className: 'top-[22%] right-[8%]' },
-  { text: 'Afrobeats · Arm 1', className: 'top-[48%] right-[30%]' },
-  { text: 'Shoegaze · Arm 3', className: 'bottom-[26%] right-[12%]' },
-  { text: '40 genres · 4 arms', className: 'top-[30%] right-[44%]' },
+  { text: 'Afrobeats · Arm 1', className: 'top-[60%] right-[3%]' },
+  { text: 'Shoegaze · Arm 3', className: 'bottom-[16%] right-[34%]' },
+  { text: '40 genres · 4 arms', className: 'top-[14%] right-[30%]' },
 ]
 
 const fadeUp = {
@@ -83,7 +83,7 @@ function Hero({ can3D }: { can3D: boolean }) {
         <div className="absolute inset-0 bg-gradient-to-t from-[#09080f] via-transparent to-[#09080f]/40" />
       </div>
       {can3D && (
-        <div className="absolute inset-0 hidden md:left-[30%] md:block" aria-hidden>
+        <div className="absolute inset-0 hidden md:left-[42%] md:block" aria-hidden>
           <Quiet>
             <Suspense fallback={null}>
               <GalaxyScene />
