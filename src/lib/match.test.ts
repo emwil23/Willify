@@ -61,6 +61,18 @@ describe('bestMatch', () => {
     expect(bestMatch(s, [karaoke, noPreview, live, original])?.id).toBe(original.id)
     expect(bestMatch(s, [karaoke])).toBeNull()
   })
+
+  it('takes the original over a remix, unless the remix was asked for', () => {
+    const remix = track('Tycho', 'Montana (Few Nolder Remix)')
+    const original = track('Tycho', 'Montana')
+    expect(bestMatch({ artist: 'Tycho', title: 'Montana' }, [remix, original])?.id).toBe(
+      original.id,
+    )
+    expect(bestMatch({ artist: 'Tycho', title: 'Montana' }, [remix])?.id).toBe(remix.id)
+    expect(bestMatch({ artist: 'Tycho', title: 'Montana (Remix)' }, [original, remix])?.id).toBe(
+      remix.id,
+    )
+  })
 })
 
 describe('verify', () => {

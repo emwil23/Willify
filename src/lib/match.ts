@@ -13,6 +13,8 @@ const NOISE = /\s*[([][^)\]]*[)\]]|\s+-\s+.*$/g
 const OTHER_RECORDING =
   /\b(karaoke|tribute|cover|instrumental|made famous|in the style of|8-bit|lullaby)\b/i
 
+const VARIANT = /\b(remix|mix|live|edit|version|acoustic|demo|remaster(ed)?|sped up|slowed)\b/i
+
 /** Lowercase, no accents, no version notes, no punctuation, "&" as "and". */
 export function normalize(s: string): string {
   return s
@@ -73,10 +75,11 @@ export function bestMatch(s: Suggestion, candidates: Track[]): Track | null {
       artistMatches(s.artist, t.artist) &&
       (wantsOther || !OTHER_RECORDING.test(`${t.title} ${t.artist} ${t.album ?? ''}`)),
   )
+  // A remix, live take or edit counts as the song, but the original wins unless one was asked for.
   const score = (t: Track) =>
     (t.previewUrl ? 4 : 0) +
     (normalize(t.title) === normalize(s.title) ? 2 : 0) +
-    (/\blive\b/i.test(t.title) ? 0 : 1)
+    (VARIANT.test(t.title) === VARIANT.test(s.title) ? 1 : 0)
   return ok.sort((a, b) => score(b) - score(a))[0] ?? null
 }
 
