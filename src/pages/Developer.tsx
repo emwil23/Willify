@@ -85,7 +85,7 @@ export function Developer() {
             label="Emmanuel's 3D character at a turntable with headphones on, nodding to the music"
             reduce={reduce}
             eagerPoster
-            className="shadow-card relative aspect-[4/5] w-full rotate-[-1.5deg] rounded-3xl object-cover"
+            className="shadow-card relative aspect-[3/4] w-full rotate-[-1.5deg] rounded-3xl object-cover"
           />
           <span className="spec border-line bg-surface absolute -bottom-4 left-6 rounded-full border px-3 py-1.5">
             Resident DJ · EWSTUDIOS

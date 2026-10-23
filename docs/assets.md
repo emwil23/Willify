@@ -18,7 +18,7 @@ Shared style line: soft 3D render, deep space black, violet (#8F72FF) and aurora
 | `empty-likes.webp`                                      | Library, no liked songs                       | A faint heart of tiny stars above a black vinyl                                                                |
 | `og.jpg`                                                | Social share image (1200×630)                 | A galaxy-record on the right with a tonearm and a mint spark; the title and logo are added on top in code      |
 | `developer.webp`                                        | Developer page, landing card                  | The owner's character in large unbranded headphones at a turntable, smiling (reference: `asset:master`)        |
-| `developer-loop.mp4` / `.webm`, `developer-poster.webp` | Developer page (6s)                           | The same character nodding to the music, scratching lightly, then smiling at the camera                        |
+| `developer-loop.mp4` / `.webm`, `developer-poster.webp` | Developer page (6s, cropped to 3:4)           | The same character nodding to the music, scratching lightly, then smiling at the camera                        |
 | `listen-on-apple-music.svg`                             | Player bar, now playing                       | Apple's official badge, downloaded unaltered from Apple's marketing tools (tools.applemediaservices.com)       |
 
 ## Processing
