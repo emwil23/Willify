@@ -6,7 +6,7 @@
 
 An AI music DJ that can't make songs up. Describe a moment in a sentence and Willify builds a playlist of real songs from the iTunes catalogue, checked one by one, then plays 30-second previews straight away. Refine it with thumbs and a few words, explore 40 genres in a 3D galaxy, and take the daily clue quiz. No account, no Premium.
 
-**Live address coming soon** · [The shared API](https://github.com/emwil23/ew-apps-api)
+**[willify.ewstudios.workers.dev](https://willify.ewstudios.workers.dev)** · [The shared API](https://github.com/emwil23/ew-apps-api)
 
 ![React](https://img.shields.io/badge/React-19-61DAFB?style=flat-square)
 ![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178C6?style=flat-square)
@@ -158,7 +158,7 @@ flowchart LR
 | Version           | Concept                                                                                               | Why it changed                                                                          |
 | :---------------- | :---------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------- |
 | v1 (2021)         | A React 17 Spotify search and player, folded in with a MusicSearchApp that only `console.log`ged      | Premium-only playback, a hard-coded client ID, and a login server that no longer exists |
-| **v2 (Oct 2026)** | An AI music DJ with checked iTunes songs, instant previews, a genre galaxy, a library and a clue quiz | Ready to deploy                                                                         |
+| **v2 (Oct 2026)** | An AI music DJ with checked iTunes songs, instant previews, a genre galaxy, a library and a clue quiz | Live                                                                                    |
 
 ## How it was made
 
