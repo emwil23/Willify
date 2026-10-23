@@ -18,7 +18,7 @@ import {
 import { PageHeader } from '@/components/PageHeader'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/cn'
-import { SOURCE_NAME, SOURCES } from '@/lib/photos'
+import { db } from '@/lib/db'
 import { useSettings, type ProviderId, type Theme } from '@/stores/settings'
 import { Link } from '@tanstack/react-router'
 import { KeyRound, Monitor, Moon, Sun, Trash2 } from 'lucide-react'
@@ -91,8 +91,8 @@ export function SettingsPage() {
 
       <Section id="ai" title="AI">
         <p className="text-muted mb-4 max-w-prose text-sm">
-          AI is free in Willify, never behind Pro. Pick where it runs. It sees your vibe, board text
-          and public stock photos, never images you upload. See the{' '}
+          AI is free in Willify, never behind Pro. Pick where it runs. It sees your vibe, refine
+          instructions and song names, nothing personal. See the{' '}
           <Link to="/privacy" className="text-accent-text underline underline-offset-4">
             privacy page
           </Link>
@@ -131,32 +131,50 @@ export function SettingsPage() {
         <ProviderSetup provider={s.provider} />
       </Section>
 
-      <Section id="sources" title="Photo sources">
+      <Section id="store" title="Music store">
         <p className="text-muted mb-4 max-w-prose text-sm">
-          Which libraries Willify searches by default. Openverse photos carry Creative Commons
-          licences; some forbid commercial use, so check each one.
+          The iTunes country Willify searches. Songs and previews differ a little from country to
+          country.
         </p>
-        <div className="flex flex-wrap gap-2">
-          {SOURCES.map((src) => (
-            <label
-              key={src}
-              className="border-line has-checked:border-accent-text flex cursor-pointer items-center gap-2 rounded-full border px-4 py-2 text-sm"
-            >
-              <input
-                type="checkbox"
-                checked={s.sources.includes(src)}
-                onChange={(e) => {
-                  const next = e.target.checked
-                    ? [...s.sources, src]
-                    : s.sources.filter((x) => x !== src)
-                  if (next.length) s.set({ sources: next })
-                }}
-                className="accent-[var(--accent-text)]"
-              />
-              {SOURCE_NAME[src]}
-            </label>
-          ))}
+        <div className="max-w-xs">
+          <label htmlFor="country" className="spec text-muted">
+            Country
+          </label>
+          <select
+            id="country"
+            value={s.country}
+            onChange={(e) => s.set({ country: e.target.value })}
+            className={cn(input, 'mt-1.5')}
+          >
+            {COUNTRIES.map(([code, name]) => (
+              <option key={code} value={code}>
+                {name}
+              </option>
+            ))}
+            {!COUNTRIES.some(([c]) => c === s.country) && (
+              <option value={s.country}>{s.country}</option>
+            )}
+          </select>
         </div>
+      </Section>
+
+      <Section id="data" title="Your data">
+        <p className="text-muted mb-4 max-w-prose text-sm">
+          Playlists, likes, quiz scores and plays are kept only in this browser.
+        </p>
+        <Button
+          variant="danger"
+          size="sm"
+          onClick={() => {
+            if (
+              !confirm('Clear your listening history? "Your week in music" starts again from zero.')
+            )
+              return
+            void db.plays.clear().then(() => toast.success('Listening history cleared'))
+          }}
+        >
+          <Trash2 /> Clear listening history
+        </Button>
       </Section>
 
       <p className="spec text-muted pt-8">Willify build {__BUILD__}</p>
@@ -389,7 +407,7 @@ function ProviderSetup({ provider }: { provider: ProviderId | null }) {
             onClick={() => {
               if (
                 !confirm(
-                  'Delete your EW account? Your sign-in, passkeys and AI usage are removed from our server for every EW app. Boards stay in this browser.',
+                  'Delete your EW account? Your sign-in, passkeys and AI usage are removed from our server for every EW app. Playlists stay in this browser.',
                 )
               )
                 return
@@ -525,3 +543,29 @@ function PuterSetup() {
     </div>
   )
 }
+
+// iTunes storefronts people are most likely to want; any other code from the browser's region still works.
+const COUNTRIES: [string, string][] = [
+  ['US', 'United States'],
+  ['GB', 'United Kingdom'],
+  ['CA', 'Canada'],
+  ['AU', 'Australia'],
+  ['IN', 'India'],
+  ['NG', 'Nigeria'],
+  ['ZA', 'South Africa'],
+  ['KE', 'Kenya'],
+  ['GH', 'Ghana'],
+  ['IE', 'Ireland'],
+  ['DE', 'Germany'],
+  ['FR', 'France'],
+  ['ES', 'Spain'],
+  ['IT', 'Italy'],
+  ['NL', 'Netherlands'],
+  ['SE', 'Sweden'],
+  ['BR', 'Brazil'],
+  ['MX', 'Mexico'],
+  ['JP', 'Japan'],
+  ['KR', 'South Korea'],
+  ['SG', 'Singapore'],
+  ['AE', 'United Arab Emirates'],
+]

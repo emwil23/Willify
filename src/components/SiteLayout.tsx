@@ -55,7 +55,7 @@ export function Footer() {
         <div className="max-w-xs">
           <Logo />
           <p className="text-muted mt-3 text-sm">
-            AI moodboards for creative direction. Real, credited stock photos; open source.
+            An AI music DJ that only plays real songs. Previews courtesy of iTunes; open source.
           </p>
         </div>
         <nav aria-label="Footer" className="grid grid-cols-2 gap-x-12 gap-y-2 text-sm">

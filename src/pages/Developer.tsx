@@ -30,8 +30,9 @@ const STACK = [
   'TypeScript',
   'TanStack Router',
   'Dexie',
+  'iTunes Search API',
   'Three.js / R3F',
-  'node-vibrant',
+  'Web Audio API',
   'GSAP',
   'Hono',
   'Supabase',
@@ -42,17 +43,17 @@ export function Developer() {
   const reduce = useReducedMotionSafe()
   return (
     <div className="relative overflow-hidden">
-      <div className="desk pointer-events-none absolute inset-0 opacity-60" aria-hidden />
+      <div className="stars pointer-events-none absolute inset-0 opacity-60" aria-hidden />
       <section className="relative mx-auto grid max-w-6xl items-center gap-12 px-6 pt-36 pb-20 md:grid-cols-[1.1fr_1fr]">
         <div>
           <p className="spec text-accent-text">Meet the developer</p>
-          <h1 className="font-display mt-4 text-6xl leading-[0.95] md:text-8xl">
+          <h1 className="font-display mt-4 text-6xl leading-[0.95] font-extrabold [font-stretch:80%] md:text-8xl">
             Hi, I'm Emmanuel.
           </h1>
           <p className="text-muted mt-6 max-w-lg text-lg">
             I design and build products end to end, from the 3D landing page to the API that keeps
-            the keys safe. Willify started in 2021 as a photo search exercise; this is what it became
-            when I rebuilt it as a real creative tool.
+            the keys safe. Willify started in 2021 as a Spotify player only Premium users could use;
+            this is what it became when I rebuilt it as an AI DJ anyone can play.
           </p>
           <ul className="mt-8 flex flex-wrap gap-2" aria-label="Stack used in Willify">
             {STACK.map((s) => (
@@ -75,25 +76,25 @@ export function Developer() {
 
         <div className="relative mx-auto w-full max-w-md">
           <div
-            className="from-accent/25 absolute -inset-6 rounded-[2.5rem] bg-gradient-to-br via-transparent to-[#ff5a36]/25 blur-2xl"
+            className="from-accent/25 to-live/25 absolute -inset-6 rounded-[2.5rem] bg-gradient-to-br via-transparent blur-2xl"
             aria-hidden
           />
           <LoopVideo
             src="/media/developer-loop"
             poster="/media/developer-poster.webp"
-            label="Emmanuel's 3D character pinning a print to a moodboard wall, then smiling at the camera"
+            label="Emmanuel's 3D character at a turntable with headphones on, nodding to the music"
             reduce={reduce}
             eagerPoster
-            className="print relative aspect-[4/5] w-full rotate-[-1.5deg]"
+            className="shadow-card relative aspect-[4/5] w-full rotate-[-1.5deg] rounded-3xl object-cover"
           />
           <span className="spec border-line bg-surface absolute -bottom-4 left-6 rounded-full border px-3 py-1.5">
-            Art director · EWSTUDIOS
+            Resident DJ · EWSTUDIOS
           </span>
         </div>
       </section>
 
       <section aria-labelledby="contact-h" className="relative mx-auto max-w-6xl px-6 pb-28">
-        <h2 id="contact-h" className="font-display mb-6 text-4xl">
+        <h2 id="contact-h" className="font-display mb-6 text-4xl font-bold">
           Say hello
         </h2>
         <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
@@ -103,7 +104,7 @@ export function Developer() {
                 href={href}
                 className="group border-line bg-surface/60 hover:border-accent-text flex items-center gap-4 rounded-2xl border p-5 transition-colors"
               >
-                <Icon className="text-muted group-hover:text-accent-text-text size-6" aria-hidden />
+                <Icon className="text-muted group-hover:text-accent-text size-6" aria-hidden />
                 <span>
                   <span className="block font-medium">{label}</span>
                   <span className="spec text-muted">{handle}</span>

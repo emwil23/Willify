@@ -17,56 +17,53 @@
   font-display: swap;
   src: url('/fonts/jetbrains-mono-latin-400.woff2') format('woff2');
 }
+/* Display face with weight, width and optical-size axes (subset to basic Latin with fontTools; see docs/assets.md).
+   The landing headline's width axis follows the playing preview. */
 @font-face {
-  font-family: 'Instrument Serif';
+  font-family: 'Bricolage Grotesque';
   font-style: normal;
-  font-weight: 400;
+  font-weight: 200 800;
+  font-stretch: 75% 100%;
   font-display: swap;
-  src: url('/fonts/instrument-serif-latin-400-normal.woff2') format('woff2');
-}
-@font-face {
-  font-family: 'Instrument Serif';
-  font-style: italic;
-  font-weight: 400;
-  font-display: swap;
-  src: url('/fonts/instrument-serif-latin-400-italic.woff2') format('woff2');
+  src: url('/fonts/bricolage-grotesque-latin-var.woff2') format('woff2-variations');
 }
 
 @custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
 
-/* Palette from docs/design-brief.md: a warm darkroom desk; the photos carry the colour. */
+/* Palette from docs/design-brief.md: deep space with a violet needle and aurora-mint light. */
 :root,
 [data-theme='dark'] {
-  --bg: #0e0d0c;
-  --surface: #181614;
-  --surface-2: #211e1b;
-  --line: #2a2723;
-  --print: #f4f0e8;
-  --text: #ede8df;
-  --muted: #a39c91;
-  /* Loupe green: fills with dark ink on top, rings and selection. */
-  --accent: #d4ff3a;
-  --accent-ink: #0e0d0c;
+  --bg: #09080f;
+  --surface: #13121c;
+  --surface-2: #1c1a28;
+  --line: #2a2838;
+  --text: #f1eef8;
+  --muted: #a8a3bc;
+  /* Violet: fills with dark ink on top, rings and the needle. */
+  --accent: #8f72ff;
+  --accent-ink: #09080f;
   /* Accent as text on the background. */
-  --accent-text: #d4ff3a;
-  --danger: #ff5a36;
-  --shadow: 0 1px 2px rgb(0 0 0 / 0.5), 0 12px 32px -8px rgb(0 0 0 / 0.6);
+  --accent-text: #a48cff;
+  /* Aurora mint: playing state, levels, the live waveform. */
+  --live: #6cf2c2;
+  --danger: #ff6a7d;
+  --shadow: 0 1px 2px rgb(0 0 0 / 0.5), 0 16px 40px -12px rgb(0 0 0 / 0.7);
   color-scheme: dark;
 }
 
 [data-theme='light'] {
-  --bg: #f2eee6;
+  --bg: #f3f0ea;
   --surface: #ffffff;
-  --surface-2: #e9e4da;
-  --line: #d9d2c5;
-  --print: #ffffff;
-  --text: #1a1816;
-  --muted: #5e574d;
-  --accent: #d4ff3a;
-  --accent-ink: #0e0d0c;
-  --accent-text: #4a6400;
-  --danger: #c2381a;
-  --shadow: 0 1px 2px rgb(40 30 20 / 0.12), 0 12px 32px -10px rgb(40 30 20 / 0.25);
+  --surface-2: #e9e5dc;
+  --line: #d8d2c6;
+  --text: #15131d;
+  --muted: #5a566a;
+  --accent: #5b3fe0;
+  --accent-ink: #ffffff;
+  --accent-text: #5b3fe0;
+  --live: #0b7a5a;
+  --danger: #c0283f;
+  --shadow: 0 1px 2px rgb(30 20 50 / 0.12), 0 16px 40px -14px rgb(30 20 50 / 0.28);
   color-scheme: light;
 }
 
@@ -75,15 +72,15 @@
   --color-surface: var(--surface);
   --color-surface-2: var(--surface-2);
   --color-line: var(--line);
-  --color-print: var(--print);
   --color-text: var(--text);
   --color-muted: var(--muted);
   --color-accent: var(--accent);
   --color-accent-ink: var(--accent-ink);
   --color-accent-text: var(--accent-text);
+  --color-live: var(--live);
   --color-danger: var(--danger);
-  --shadow-print: var(--shadow);
-  --font-display: 'Instrument Serif', ui-serif, Georgia, serif;
+  --shadow-card: var(--shadow);
+  --font-display: 'Bricolage Grotesque', ui-sans-serif, system-ui, sans-serif;
   --font-sans: 'Inter Tight Variable', ui-sans-serif, system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, monospace;
 }
@@ -108,38 +105,32 @@
   }
 }
 
-/* Mono spec line: "UNSPLASH / 4000×6000 / #8C5A3C". */
+/* Mono label: "SIDE A · 12 TRACKS · 30S PREVIEWS". */
 @utility spec {
   @apply font-mono text-[11px] tracking-[0.14em] uppercase;
 }
 
-/* A photo as a print: warm white border and a soft shadow. */
-@utility print {
-  background: var(--print);
-  padding: 6px;
-  box-shadow: var(--shadow);
-}
-
-/* The tick-mark ruler along the board and landing sections. */
-@utility ruler-x {
-  background-image:
-    linear-gradient(90deg, var(--line) 1px, transparent 1px),
-    linear-gradient(90deg, var(--muted) 1px, transparent 1px);
-  background-size:
-    8px 6px,
-    80px 12px;
-  background-repeat: repeat-x;
-  background-position: bottom left;
-}
-
-/* The light table: a faint dot grid. */
-@utility desk {
-  background-color: var(--bg);
-  background-image: radial-gradient(
-    color-mix(in oklab, var(--muted) 22%, transparent) 1px,
-    transparent 1px
+/* Record grooves: fine concentric rings, for sleeves, the 404 and empty states. */
+@utility grooves {
+  background-image: repeating-radial-gradient(
+    circle at center,
+    color-mix(in oklab, var(--text) 6%, transparent) 0 1px,
+    transparent 1px 8px
   );
-  background-size: 24px 24px;
+}
+
+/* A faint starfield behind big surfaces. */
+@utility stars {
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(color-mix(in oklab, var(--text) 35%, transparent) 1px, transparent 1px),
+    radial-gradient(color-mix(in oklab, var(--accent-text) 30%, transparent) 1px, transparent 1px);
+  background-size:
+    90px 90px,
+    150px 150px;
+  background-position:
+    0 0,
+    45px 70px;
 }
 
 /* Film grain over big hero surfaces. The element must be positioned (relative, sticky…). */
@@ -149,7 +140,7 @@
     position: absolute;
     inset: 0;
     pointer-events: none;
-    opacity: 0.07;
+    opacity: 0.06;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
 }
@@ -162,6 +153,41 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+}
+
+/* The landing headline breathes on its width axis, like a speaker cone. */
+@keyframes breathe {
+  0%,
+  100% {
+    font-stretch: 100%;
+  }
+  50% {
+    font-stretch: 82%;
+  }
+}
+.breathe {
+  animation: breathe 6s ease-in-out infinite;
+}
+
+/* The hero's vibe ticker: two copies of the list, scrolled by half its width. */
+@keyframes ticker {
+  to {
+    transform: translateX(-50%);
+  }
+}
+.ticker {
+  animation: ticker 60s linear infinite;
+}
+.ticker:hover,
+.ticker:focus-within {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .breathe,
+  .ticker {
+    animation: none;
   }
 }
 

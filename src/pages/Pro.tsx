@@ -10,30 +10,31 @@ export const PLANS = [
 ]
 
 const FREE = [
-  'Unlimited boards on your device',
-  'Search Unsplash, Pexels and Openverse at once',
-  'Palette extraction, harmonies, contrast checks, token export',
-  'AI queries, alt text, font pairings and briefs (free, never paywalled)',
-  'Board export as PNG',
+  'The Vibe DJ, with every song checked against iTunes',
+  'Instant 30-second previews; no account, no Premium',
+  'Search, artist and album pages, and the 3D genre galaxy',
+  'Unlimited playlists and likes on your device, export as text or CSV',
+  'The daily quiz and “Your week in music”',
+  'AI playlists, refining, liner notes and quiz clues (free, never paywalled)',
 ]
 const PRO = [
-  'Share a board as a read-only link',
-  'Brand kit PDF: palette, fonts, brief and credited photos',
-  'Sync boards across your devices',
+  'Sync playlists and likes across your devices',
+  'Public share links for playlists',
+  'A party room: build a playlist together, live',
   'Higher daily AI quota',
-  'One pass unlocks all 7 EW apps',
+  'One pass unlocks every EW app',
 ]
 
 export function Pro() {
   return (
     <div className="mx-auto max-w-6xl px-6 pt-36 pb-28">
       <p className="spec text-accent-text">Willify Pro</p>
-      <h1 className="font-display mt-4 max-w-3xl text-6xl leading-[0.95] md:text-8xl">
-        Free to make. Pro when the client needs a link.
+      <h1 className="font-display mt-4 max-w-3xl text-6xl leading-[0.95] font-extrabold [font-stretch:80%] md:text-8xl">
+        Free to listen. Pro when you want it everywhere.
       </h1>
       <p className="text-muted mt-6 max-w-xl text-lg">
-        Pro pays for the servers that share, sync and render. The AI stays free for everyone.
-        Regional prices are available at checkout.
+        Pro pays for the servers that sync and share. The AI stays free for everyone. Regional
+        prices are available at checkout.
       </p>
 
       <ul className="mt-14 grid gap-4 md:grid-cols-3">
@@ -47,7 +48,7 @@ export function Pro() {
           >
             <p className="spec text-muted">{p.name}</p>
             <p className="mt-4">
-              <span className="font-display text-6xl">{p.price}</span>
+              <span className="font-display text-6xl font-bold">{p.price}</span>
               <span className="text-muted"> {p.per}</span>
             </p>
             <p className="text-muted mt-2 text-sm">{p.note}</p>
@@ -66,7 +67,7 @@ export function Pro() {
         Checkout opens once the core app has been tested in the wild. Until then everything here is
         free.{' '}
         <Link to="/app" className="text-accent-text underline underline-offset-4">
-          Start a board
+          Make a playlist
         </Link>
         .
       </p>
@@ -85,7 +86,7 @@ function FeatureList({
 }) {
   return (
     <section>
-      <h2 className="font-display mb-4 text-3xl">{title}</h2>
+      <h2 className="font-display mb-4 text-3xl font-semibold">{title}</h2>
       <ul className="flex flex-col gap-3">
         {items.map((i) => (
           <li key={i} className="flex items-start gap-3">

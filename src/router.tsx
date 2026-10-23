@@ -76,28 +76,59 @@ const appPages = [
   createRoute({
     getParentRoute: () => shell,
     path: 'app',
-    // ?new=1 opens the "Describe a vibe" dialog (PWA shortcut).
-    validateSearch: (s: Record<string, unknown>): { new?: number } => (s.new ? { new: 1 } : {}),
-    component: lazyRouteComponent(() => import('@/pages/Dashboard'), 'Dashboard'),
+    // ?vibe=... starts the DJ straight away (landing page box, example chips, PWA shortcut).
+    validateSearch: (s: Record<string, unknown>): { vibe?: string } =>
+      typeof s.vibe === 'string' && s.vibe.trim() ? { vibe: s.vibe.slice(0, 300) } : {},
+    component: lazyRouteComponent(() => import('@/pages/Dj'), 'Dj'),
   }),
   createRoute({
     getParentRoute: () => shell,
-    path: 'app/board/$boardId',
-    validateSearch: (s: Record<string, unknown>): { build?: number } =>
-      s.build ? { build: 1 } : {},
-    component: lazyRouteComponent(() => import('@/pages/BoardPage'), 'BoardPage'),
+    path: 'app/search',
+    validateSearch: (
+      s: Record<string, unknown>,
+    ): { q?: string; tab?: 'songs' | 'albums' | 'artists' } => ({
+      ...(typeof s.q === 'string' && s.q ? { q: s.q.slice(0, 100) } : {}),
+      ...(s.tab === 'albums' || s.tab === 'artists' ? { tab: s.tab } : {}),
+    }),
+    component: lazyRouteComponent(() => import('@/pages/SearchPage'), 'SearchPage'),
   }),
   createRoute({
     getParentRoute: () => shell,
-    path: 'app/discover',
-    validateSearch: (s: Record<string, unknown>): { q?: string } =>
-      typeof s.q === 'string' && s.q ? { q: s.q.slice(0, 100) } : {},
-    component: lazyRouteComponent(() => import('@/pages/Discover'), 'Discover'),
+    path: 'app/artist/$artistId',
+    component: lazyRouteComponent(() => import('@/pages/ArtistPage'), 'ArtistPage'),
   }),
   createRoute({
     getParentRoute: () => shell,
-    path: 'app/palette',
-    component: lazyRouteComponent(() => import('@/pages/PalettePage'), 'PalettePage'),
+    path: 'app/album/$albumId',
+    component: lazyRouteComponent(() => import('@/pages/AlbumPage'), 'AlbumPage'),
+  }),
+  createRoute({
+    getParentRoute: () => shell,
+    path: 'app/galaxy',
+    component: lazyRouteComponent(() => import('@/pages/Galaxy'), 'Galaxy'),
+  }),
+  createRoute({
+    getParentRoute: () => shell,
+    path: 'app/library',
+    component: lazyRouteComponent(() => import('@/pages/Library'), 'Library'),
+  }),
+  createRoute({
+    getParentRoute: () => shell,
+    path: 'app/playlist/$playlistId',
+    component: lazyRouteComponent(() => import('@/pages/PlaylistPage'), 'PlaylistPage'),
+  }),
+  createRoute({
+    getParentRoute: () => shell,
+    path: 'app/quiz',
+    // ?playlist=<id> quizzes you on one of your playlists instead of the daily challenge.
+    validateSearch: (s: Record<string, unknown>): { playlist?: string } =>
+      typeof s.playlist === 'string' && s.playlist ? { playlist: s.playlist.slice(0, 64) } : {},
+    component: lazyRouteComponent(() => import('@/pages/Quiz'), 'Quiz'),
+  }),
+  createRoute({
+    getParentRoute: () => shell,
+    path: 'app/now-playing',
+    component: lazyRouteComponent(() => import('@/pages/NowPlaying'), 'NowPlaying'),
   }),
   createRoute({
     getParentRoute: () => shell,
@@ -106,18 +137,7 @@ const appPages = [
   }),
 ]
 
-// A shared board stands alone: no app chrome, read-only.
-const shared = createRoute({
-  getParentRoute: () => root,
-  path: 'b/$shareId',
-  component: lazyRouteComponent(() => import('@/pages/SharedBoard'), 'SharedBoard'),
-})
-
-const routeTree = root.addChildren([
-  site.addChildren(sitePages),
-  shell.addChildren(appPages),
-  shared,
-])
+const routeTree = root.addChildren([site.addChildren(sitePages), shell.addChildren(appPages)])
 
 export const router = createRouter({ routeTree, defaultPreload: 'intent', scrollRestoration: true })
 

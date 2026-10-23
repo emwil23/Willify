@@ -38,17 +38,25 @@ export default defineConfig({
       manifest: {
         name: 'Willify',
         short_name: 'Willify',
-        description: 'AI moodboards for creative direction',
-        theme_color: '#0E0D0C',
-        background_color: '#0E0D0C',
+        description: 'An AI music DJ that only plays real songs',
+        theme_color: '#09080F',
+        background_color: '#09080F',
         display: 'standalone',
         start_url: '/app',
         icons: [
           { src: '/pwa-192.png', sizes: '192x192', type: 'image/png' },
           { src: '/pwa-512.png', sizes: '512x512', type: 'image/png' },
-          { src: '/pwa-512.png', sizes: '512x512', type: 'image/png', purpose: 'maskable' },
+          {
+            src: '/pwa-maskable-512.png',
+            sizes: '512x512',
+            type: 'image/png',
+            purpose: 'maskable',
+          },
         ],
-        shortcuts: [{ name: 'New board', url: '/app?new=1' }],
+        shortcuts: [
+          { name: 'Vibe DJ', url: '/app' },
+          { name: 'Daily quiz', url: '/app/quiz' },
+        ],
       },
       workbox: {
         // Take over as soon as a new version installs, so a deploy reaches open tabs on their next load.
@@ -56,12 +64,19 @@ export default defineConfig({
         clientsClaim: true,
         globPatterns: ['**/*.{js,css,svg,woff2,avif,webp,png}', 'shell/index.html'],
         // The hero video and the 3D bundle are landing-page extras; don't make every install download them.
-        globIgnores: ['**/media/*.mp4', '**/media/*.webm', '**/Hero3D-*.js'],
+        globIgnores: [
+          '**/media/*.mp4',
+          '**/media/*.webm',
+          '**/GalaxyScene-*.js',
+          '**/Visualiser-*.js',
+        ],
+        // No runtime caching on purpose: Apple's terms forbid storing previews or artwork, so those always
+        // stream from Apple, and API answers are cached by the server instead.
         navigateFallback: '/shell/index.html',
       },
     }),
   ],
-  // The lazy 3D hero chunk (three.js) is ~1 MB by itself; it loads after first paint, on wide screens only.
+  // The lazy 3D chunks (three.js) are ~1 MB by themselves; they load after first paint, and only with WebGL.
   build: { chunkSizeWarningLimit: 1200 },
   resolve: { alias: { '@': fileURLToPath(new URL('./src', import.meta.url)) } },
   test: {
