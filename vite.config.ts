@@ -69,6 +69,7 @@ export default defineConfig({
           '**/media/*.webm',
           '**/GalaxyScene-*.js',
           '**/Visualiser-*.js',
+          '**/react-three-fiber*.js',
         ],
         // No runtime caching on purpose: Apple's terms forbid storing previews or artwork, so those always
         // stream from Apple, and API answers are cached by the server instead.
