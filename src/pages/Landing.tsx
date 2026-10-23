@@ -9,7 +9,7 @@ import { PLANS } from '@/pages/Pro'
 import { Link, useNavigate } from '@tanstack/react-router'
 import { ArrowRight, BadgeCheck, Gauge, Headphones, Orbit, Sparkles, ThumbsUp } from 'lucide-react'
 import { motion } from 'motion/react'
-import { lazy, Suspense, useId, useState, type ReactNode } from 'react'
+import { lazy, Suspense, useId, type ReactNode } from 'react'
 
 const GalaxyScene = lazy(() => import('@/components/GalaxyScene'))
 
@@ -59,7 +59,6 @@ export function Landing() {
 
 function Hero({ can3D }: { can3D: boolean }) {
   const navigate = useNavigate()
-  const [vibe, setVibe] = useState('')
   const inputId = useId()
 
   return (
@@ -140,9 +139,14 @@ function Hero({ can3D }: { can3D: boolean }) {
           animate="show"
           variants={fadeUp}
           className="mt-8 flex max-w-xl flex-col gap-2 rounded-3xl border border-white/15 bg-black/40 p-2 backdrop-blur-md sm:flex-row sm:items-center sm:pl-5"
+          // Works as a plain form before the app's JS has loaded (the page is prerendered).
+          action="/app"
+          method="get"
           onSubmit={(e) => {
             e.preventDefault()
-            void navigate({ to: '/app', search: { vibe: vibe.trim() || VIBES[0] } })
+            const v = new FormData(e.currentTarget).get('vibe')
+            const vibe = typeof v === 'string' ? v.trim() : ''
+            void navigate({ to: '/app', search: { vibe } })
           }}
         >
           <label htmlFor={inputId} className="sr-only">
@@ -150,8 +154,9 @@ function Hero({ can3D }: { can3D: boolean }) {
           </label>
           <input
             id={inputId}
-            value={vibe}
-            onChange={(e) => setVibe(e.target.value)}
+            name="vibe"
+            required
+            minLength={2}
             maxLength={300}
             placeholder={VIBES[0]}
             className="h-12 flex-1 bg-transparent px-3 text-base text-white outline-none placeholder:text-white/45 sm:px-0"
