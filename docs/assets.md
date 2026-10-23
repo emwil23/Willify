@@ -1,6 +1,6 @@
 # Willify assets
 
-Generated in Google Flow, project "Revamp", on 2026-10-23: stills with **Nano Banana Pro** (0 credits) and clips with **Omni 1.1 Flash** (720p). The owner's character (the `master` image in the project) appears only on the developer page. Album artwork in the app always comes from iTunes, credited; no image here is ever shown as a cover.
+Generated in Google Flow on 2026-10-23 (the stills and the galaxy clip in the project that was open in the Flow window; the developer portrait is made in project "Revamp", which holds the owner's `master` image): stills with **Nano Banana Pro** (0 credits) and clips with **Omni 1.1 Flash** (720p). The owner's character (the `master` image in the project) appears only on the developer page. Album artwork in the app always comes from iTunes, credited; no image here is ever shown as a cover.
 
 Shared style line: soft 3D render, deep space black, violet (#8F72FF) and aurora mint (#6CF2C2) light, matte black vinyl, unbranded devices, no text, no logos.
 
