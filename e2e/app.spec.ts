@@ -165,15 +165,40 @@ test.beforeEach(async ({ page }) => {
   await mockApi(page)
 })
 
-test('landing tells the story and starts the DJ @mobile', async ({ page }) => {
+test('landing sentence starts the DJ @mobile', async ({ page }) => {
   await page.goto('/')
-  await expect(page.getByRole('heading', { level: 1 })).toContainText('Describe the moment.')
+  await expect(page.getByRole('heading', { level: 1, name: 'Tonight sounds like' })).toBeVisible()
   await expect(page.getByText('Made with')).toContainText('EWSTUDIOS')
-  await expect(page.getByRole('heading', { name: /four moves/i })).toBeVisible()
-  await page.getByRole('textbox', { name: 'Describe a moment' }).fill('rainy sunday coding')
-  await page.getByRole('button', { name: 'Make my playlist' }).click()
+  await page.getByRole('textbox', { name: 'Describe the moment' }).fill('rainy sunday coding')
+  await page.getByRole('button', { name: 'Make my playlist' }).first().click()
   await expect(page).toHaveURL(/\/app\?vibe=rainy/)
   await expect(page.getByRole('list', { name: 'Playlist' }).getByRole('listitem')).toHaveCount(8)
+})
+
+test('landing tells side A, shows the made-up songs dropped, and opens the doors @mobile', async ({
+  page,
+}) => {
+  await page.goto('/')
+  await expect(page.getByRole('list', { name: 'How it works' }).getByRole('listitem')).toHaveCount(
+    4,
+  )
+  const checked = page.getByRole('list', { name: 'AI suggestions, checked against iTunes' })
+  await expect(checked.getByText('Made up · dropped')).toHaveCount(2)
+  await expect(checked.getByText('On iTunes')).toHaveCount(6)
+  await page.waitForLoadState('networkidle') // the app takes over after the prerendered page loads
+  // Sound is opt-in: today's chart plays, with Apple's badge and the iTunes credit beside it.
+  await page.getByRole('button', { name: 'Listen while you scroll' }).click()
+  const playing = page.getByRole('group', { name: 'Now playing' })
+  await expect(playing.getByRole('link', { name: 'Listen on Apple Music' })).toHaveAttribute(
+    'href',
+    /music\.apple\.com/,
+  )
+  await expect(playing.getByText('Previews courtesy of iTunes')).toBeVisible()
+  await page
+    .getByRole('link', { name: /Galaxy/ })
+    .last()
+    .click()
+  await expect(page).toHaveURL(/\/app\/galaxy$/)
 })
 
 test('AI vibe → checked playlist → refine → save → export', async ({ page, context }) => {
